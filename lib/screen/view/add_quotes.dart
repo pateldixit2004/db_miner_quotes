@@ -26,9 +26,10 @@ class _QuotesState extends State<Quotes> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.amberAccent,
         body: Column(
           children: [
+            SizedBox(height: 150,),
             Container(
               height: 5.h,
               width: 90.w,
