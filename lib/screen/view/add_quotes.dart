@@ -26,18 +26,19 @@ class _QuotesState extends State<Quotes> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.black,
         body: Column(
           children: [
             Container(
               height: 5.h,
               width: 90.w,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(2.h),
-                color: Colors.red
-              ),
-              child: Text("Quotes"),
+                  borderRadius: BorderRadius.circular(2.h), color: Colors.red),
+              child: Center(child: Text("Quotes")),
             ),
-            SizedBox(height: 2.h,),
+            SizedBox(
+              height: 2.h,
+            ),
             TextFormField(
               validator: (value) {
                 if (value!.isEmpty) {
@@ -55,8 +56,9 @@ class _QuotesState extends State<Quotes> {
                   ),
                   hintText: 'Enter the Quotes  '),
             ),
-            SizedBox(height: 2.h,),
-
+            SizedBox(
+              height: 2.h,
+            ),
             Container(
               height: 5.h,
               width: 85.w,
@@ -64,7 +66,8 @@ class _QuotesState extends State<Quotes> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.sp),
                   color: Colors.red),
-              child: Obx(() =>  DropdownButton(
+              child: Obx(
+                () => DropdownButton(
                   style: TextStyle(color: Colors.black),
                   dropdownColor: Colors.red.shade900,
                   value: controller.categry.value,
@@ -74,13 +77,15 @@ class _QuotesState extends State<Quotes> {
                   items: controller.catList
                       .asMap()
                       .entries
-                      .map((e) => DropdownMenuItem(
-                    child: Text(
-                        "${controller.catList[e.key]['cat']}",
+                      .map(
+                        (e) => DropdownMenuItem(
+                          child: Text(
+                            "${controller.catList[e.key]['cat']}",
+                          ),
+                          alignment: Alignment.center,
+                          value: controller.catList[e.key]['cat'],
                         ),
-                    alignment: Alignment.center,
-                    value: controller.catList[e.key]['cat'],
-                  ))
+                      )
                       .toList(),
                   onChanged: (value) {
                     controller.categry.value = value as String;
@@ -89,16 +94,16 @@ class _QuotesState extends State<Quotes> {
                 ),
               ),
             ),
+            ElevatedButton(
+                onPressed: () {
+                  QuotesModel model = QuotesModel(
+                      quotes: txtquotes.text, cat: controller.categry.value);
 
-            ElevatedButton(onPressed: () {
-              QuotesModel model=QuotesModel(
-                quotes:txtquotes.text,cat:controller.categry.value
-              );
-
-              DbHelper.helper.insertQuotesdb(model: model);
-              controller.GetCatogoryData();
-              Get.offAllNamed('/');
-            }, child: Text("Add Quotes"))
+                  DbHelper.helper.insertQuotesdb(model: model);
+                  controller.GetCatogoryData();
+                  Get.offAllNamed('/');
+                },
+                child: Text("Add Quotes"))
           ],
         ),
       ),

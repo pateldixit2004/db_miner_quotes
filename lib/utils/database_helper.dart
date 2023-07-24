@@ -38,7 +38,7 @@ class DbHelper
 
     return await openDatabase(path,version: 1,onCreate: (db, version) async {
 
-      await db.execute('CREATE TABLE $datatable(id INTEGER PRIMARY KEY AutoIncrement  ,cat TEXT)');
+      await db.execute('CREATE TABLE $datatable(id INTEGER PRIMARY KEY AutoIncrement ,cat TEXT)');
       await db.execute('CREATE TABLE $quotestable(id INTEGER PRIMARY KEY AutoIncrement  ,quo TEXT,cat TEXT)');
 
     },);
@@ -51,7 +51,7 @@ class DbHelper
     database=await checkDb();
     await database!.insert("$datatable", {
       'cat': model!.cat,
-      'img': model.img
+      // 'img': model.img
     });
   }
 
@@ -70,7 +70,6 @@ class DbHelper
     return database!.insert("${quotestable}", {
       'quo':model!.quotes,
       'cat': model.cat,
-
     });
   }
 
@@ -78,7 +77,7 @@ class DbHelper
   Future<List<Map>> readQuotesDb({required cat})
   async {
     database=await checkDb();
-    String? query="SELECT * FROM $quotestable WHERE cat ='$cat";
+    String? query="SELECT * FROM $quotestable WHERE cat ='$cat'";
     List<Map> l1=await database!.rawQuery(query);
     return l1;
   }

@@ -14,11 +14,13 @@ class QuotesController extends GetxController
   Future<void> GetCatogoryData()
   async {
     catList.value=await DbHelper.helper.readcategoryDb();
+
   }
 
   Future<void> GetqutoesData(cat)
   async {
     quotesList.value=await DbHelper.helper.readQuotesDb(cat: cat);
+    print("===============================${quotesList.length}");
   }
 
 
