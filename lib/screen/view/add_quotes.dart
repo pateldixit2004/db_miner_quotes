@@ -30,84 +30,86 @@ class _AddQuoScreenState extends State<AddQuoScreen> {
       child: Form(
         key: txtkey,
         child: Scaffold(
-          body: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              children: [
-                TextFormField(
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Enter the quotes";
-                    }
-                  },
-                  controller: txtquo,
-                  maxLines: 5,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.sp),
-                          borderSide: BorderSide(color: Colors.redAccent)),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.sp),
-                          borderSide: BorderSide(color: Colors.redAccent)),
-                      hintText: 'Enter the Quotes'),
-                ),
-                SizedBox(
-                  height: 7,
-                ),
-                TextFormField(
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Enter the auther";
-                    }
-                  },
-                  controller: txtname,
-                  maxLines: 1,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.sp),
-                          borderSide: BorderSide(color: Colors.redAccent)),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.sp),
-                          borderSide: BorderSide(color: Colors.redAccent)),
-                      hintText: 'Enter the auther'),
-                ),
-                SizedBox(height: 20,),
-                Container(
-                  height: 6.5.h,
-                  width: 90.w,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.sp),
-                      color: Colors.redAccent),
-                  child: Obx(
-                    () =>  DropdownButton(
-                      isExpanded: true,
-                      value: controller.selectItem.value,
-                      underline: SizedBox(),
-                      items: controller.catList
-                          .asMap()
-                          .entries
-                          .map((e) => DropdownMenuItem(
-                                child:
-                                    Center(child: Text("${controller.catList[e.key]['cat']}",style: TextStyle(color: Colors.black),)),
-                                value: controller.catList[e.key]['cat'],
-                              ))
-                          .toList(),
-                      onChanged: (value) {
-                        controller.selectItem.value=value as String;
-                      },
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                children: [
+                  TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Enter the quotes";
+                      }
+                    },
+                    controller: txtquo,
+                    maxLines: 5,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.sp),
+                            borderSide: BorderSide(color: Colors.redAccent)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.sp),
+                            borderSide: BorderSide(color: Colors.redAccent)),
+                        hintText: 'Enter the Quotes'),
+                  ),
+                  SizedBox(
+                    height: 7,
+                  ),
+                  TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Enter the auther";
+                      }
+                    },
+                    controller: txtname,
+                    maxLines: 1,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.sp),
+                            borderSide: BorderSide(color: Colors.redAccent)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.sp),
+                            borderSide: BorderSide(color: Colors.redAccent)),
+                        hintText: 'Enter the auther'),
+                  ),
+                  SizedBox(height: 20,),
+                  Container(
+                    height: 6.5.h,
+                    width: 90.w,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.sp),
+                        color: Colors.redAccent),
+                    child: Obx(
+                      () =>  DropdownButton(
+                        isExpanded: true,
+                        value: controller.selectItem.value,
+                        underline: SizedBox(),
+                        items: controller.catList
+                            .asMap()
+                            .entries
+                            .map((e) => DropdownMenuItem(
+                                  child:
+                                      Center(child: Text("${controller.catList[e.key]['cat']}",style: TextStyle(color: Colors.black),)),
+                                  value: controller.catList[e.key]['cat'],
+                                ))
+                            .toList(),
+                        onChanged: (value) {
+                          controller.selectItem.value=value as String;
+                        },
 
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: 3.h,),
-                ElevatedButton(onPressed: () {
+                  SizedBox(height: 3.h,),
+                  ElevatedButton(onPressed: () {
 
-                  QuotesModel model=QuotesModel(name: txtname.text,quo: txtquo.text,cat: controller.selectItem.value);
-                  DbHelper.dbHelper.insertQuoDb(model);
-                  controller.getQuoData(controller.selectItem.value);
-                  Get.back();
-                }, child: Text('Add quotes'))
-              ],
+                    QuotesModel model=QuotesModel(name: txtname.text,quo: txtquo.text,cat: controller.selectItem.value);
+                    DbHelper.dbHelper.insertQuoDb(model);
+                    controller.getQuoData(controller.selectItem.value);
+                    Get.back();
+                  }, child: Text('Add quotes'))
+                ],
+              ),
             ),
           ),
         ),
