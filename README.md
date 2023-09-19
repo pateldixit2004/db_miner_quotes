@@ -17,6 +17,10 @@ samples, guidance on mobile development, and a full API reference.
 
 
 
+https://github.com/userdixit/db_miner_quotes/assets/120080979/2baa0deb-b21b-4cc9-bfd6-a2fa4cb813c6
+
+
+
 
 
 
