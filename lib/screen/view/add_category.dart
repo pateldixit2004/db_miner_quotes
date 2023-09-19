@@ -59,7 +59,7 @@ class _AddCatScreenState extends State<AddCatScreen> {
                       controller.getData();
                       Get.back();
                     }
-                }, child: Text("Add category"))
+                }, child: Text("Add category"),style: ElevatedButton.styleFrom(backgroundColor: Colors.redAccent),)
               ],
             ),
           ),

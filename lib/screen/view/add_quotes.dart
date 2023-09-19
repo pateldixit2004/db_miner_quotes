@@ -107,7 +107,7 @@ class _AddQuoScreenState extends State<AddQuoScreen> {
                     DbHelper.dbHelper.insertQuoDb(model);
                     controller.getQuoData(controller.selectItem.value);
                     Get.back();
-                  }, child: Text('Add quotes'))
+                  }, child: Text('Add quotes'),style: ElevatedButton.styleFrom(backgroundColor: Colors.redAccent),)
                 ],
               ),
             ),
